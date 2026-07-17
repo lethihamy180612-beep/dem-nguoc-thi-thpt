@@ -1,0 +1,202 @@
+index.html  
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đếm Ngược Ngày Thi THPT Quốc Gia</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            color: #fff;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Hiệu ứng bong bóng bay nhẹ nhàng phía sau */
+        body::before, body::after {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.03);
+            z-index: 1;
+            animation: float 20s infinite linear;
+        }
+        body::before { top: -10%; left: -10%; }
+        body::after { bottom: -10%; right: -10%; animation-delay: -10s; }
+
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-50px) rotate(180deg); }
+            100% { transform: translateY(0) rotate(360deg); }
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            background: rgba(255, 255, 255, 0.07);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border-radius: 24px;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+            max-width: 650px;
+            width: 90%;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            font-size: 1rem;
+            color: #ccc;
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+
+        .countdown {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .box {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px 10px;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .box:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            display: block;
+            color: #ff9a9e;
+            text-shadow: 0 0 10px rgba(255, 154, 158, 0.5);
+        }
+
+        .label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #ddd;
+            margin-top: 5px;
+            display: block;
+        }
+
+        .quote {
+            font-size: 0.95rem;
+            color: #e0e0e0;
+            border-left: 3px solid #ff9a9e;
+            padding-left: 15px;
+            text-align: left;
+            margin-top: 20px;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 480px) {
+            .countdown {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .number {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Đếm Ngược Thi THPT Quốc Gia 2028</h1>
+        <p class="subtitle">Hành trình vạn dặm khởi đầu từ một bước chân...</p>
+
+        <div class="countdown">
+            <div class="box">
+                <span class="number" id="days">00</span>
+                <span class="label">Ngày</span>
+            </div>
+            <div class="box">
+                <span class="number" id="hours">00</span>
+                <span class="label">Giờ</span>
+            </div>
+            <div class="box">
+                <span class="number" id="minutes">00</span>
+                <span class="label">Phút</span>
+            </div>
+            <div class="box">
+                <span class="number" id="seconds">00</span>
+                <span class="label">Giây</span>
+            </div>
+        </div>
+
+        <div class="quote">
+            "Tương lai khóc hay cười phụ thuộc vào độ lười của quá khứ. Cố gắng hết mình mỗi ngày nhé!"
+        </div>
+    </div>
+
+    <script>
+        // Đặt ngày thi mục tiêu: 25 tháng 6 năm 2028
+        const examDate = new Date("June 25, 2028 07:30:00").getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const gap = examDate - now;
+
+            if (gap <= 0) {
+                document.querySelector(".container").innerHTML = "<h1>Chúc các sĩ tử 2k10 thi tốt! 🎉</h1>";
+                return;
+            }
+
+            // Tính toán thời gian
+            const second = 1000;
+            const minute = second * 60;
+            const hour = minute * 60;
+            const day = hour * 24;
+
+            const d = Math.floor(gap / day);
+            const h = Math.floor((gap % day) / hour);
+            const m = Math.floor((gap % hour) / minute);
+            const s = Math.floor((gap % minute) / second);
+
+            // Hiển thị ra màn hình (thêm số 0 phía trước nếu < 10)
+            document.getElementById("days").innerText = d < 10 ? "0" + d : d;
+            document.getElementById("hours").innerText = h < 10 ? "0" + h : h;
+            document.getElementById("minutes").innerText = m < 10 ? "0" + m : m;
+            document.getElementById("seconds").innerText = s < 10 ? "0" + s : s;
+        }
+
+        // Chạy cập nhật mỗi giây
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+    </script>
+</body>
+</html>
