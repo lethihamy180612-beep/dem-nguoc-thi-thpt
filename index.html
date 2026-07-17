@@ -54,7 +54,7 @@
         }
 
         h1 {
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             margin-bottom: 5px;
             letter-spacing: 1px;
             text-transform: uppercase;
@@ -266,8 +266,10 @@
 <body>
 
     <div class="container">
+        <!-- ĐÃ ĐỔI TIÊU ĐỀ THÀNH VÀO LỚP 10 CHUẨN ĐÉT -->
         <h1>VÀO LỚP 10 2027</h1>
-        <!-- NƠI HIỂN THỊ LỜI CHÚC MỖI NGÀY -->
+        
+        <!-- LỜI CHÚC MỖI NGÀY -->
         <div class="wish-box" id="wish-box">✨ Đang tải lời chúc dễ thương... ✨</div>
         <div class="current-date" id="current-date-box">--/--/---- --:--:--</div>
         
@@ -310,19 +312,16 @@
     </div>
 
     <script>
-        // =========================================================================
-        // KHU VỰC CHỈNH SỬA LỜI CHÚC (Bạn có thể thoải mái sửa đổi nội dung ở đây nha!)
-        // =========================================================================
+        // CÁC LỜI CHÚC DỄ THƯƠNG HÀNG NGÀY
         const dailyWishes = [
             "🔥 Style tốt nha chú rồng nhỏ của A1! 🐉",
             "✨ Học đi babi ơi, tương lai xịn đét đang chờ kìa! ✨",
             "💖 Nay thi Toán 9+, Văn 9+ nha, làm được mà! 💖",
             "🚀 Giữ vững streak học tập hôm nay nhé rồng vàng! 🔥",
-            "🌟 Đừng lười nữa nè, chăm chi để sau này khóc trên đống tiền nha! 😉",
+            "🌟 Đừng lười nữa nè, chăm chỉ để sau này khóc trên đống tiền nha! 😉",
             "🍀 May mắn và tự tin luôn bên cậu hôm nay! 🍀",
             "🎯 Hôm nay hoàn thành hết mục tiêu rồi lướt TikTok sau nhé! 🎯"
         ];
-        // =========================================================================
 
         function setDailyWish() {
             const today = new Date();
@@ -351,6 +350,7 @@
 
             const gap = examDate - now.getTime();
             if (gap <= 0) {
+                // ĐÃ SỬA DÒNG NÀY THEO Ý BẠN MUỐN
                 document.getElementById("countdown-box").innerHTML = "Cố lên nhé các chú rồng vàng 2k12! 🐉🔥";
                 return;
             }
